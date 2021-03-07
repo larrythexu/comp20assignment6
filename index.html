@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title>Amicable Numbers</title>
+</head>
+
+<body>
+  <h1 style="text-align: center">Amicable Numbers!</h1>
+
+  <!-- Form & Data Input-->
+  <form action="index.html">
+    <label for="firstNum">First Number:</label><br>
+    <input type="number" name="num1" id="num1"><br>
+
+    <label for="firstNum">Second Number:</label><br>
+    <input type="number" name="num2" id="num2"><br><br>
+
+    <input type="button" value="Submit" onclick="checkAmicable()">
+  </form>
+
+  <!-- Display Div -->
+  <div class="resultBox">
+    <p id="resultDisplay">Awaiting Input!</p>
+  </div>
+
+
+  <!-- Check if Amicable -->
+  <script type="text/javascript">
+    function returnFactors(n) {
+      var factorArray = [1];
+
+      for (i = 2; i < n; i++) {
+        //found factor
+        if ((n % i) == 0) {
+          factorArray.push(i);
+        }
+      }
+      return factorArray;
+    }
+
+    function getSum(a) {
+      sum = 0;
+
+      for (i = 0; i < a.length; i++) {
+        sum += a[i];
+      }
+      return sum;
+    }
+
+    function printFactors(a) {
+      var text = "";
+
+      for (i = 0; i < (a.length - 1); i++) {
+        text += a[i] + ", ";
+      }
+
+      //last value without the ", "
+      text += a[a.length - 1];
+
+      return text;
+    }
+
+    function checkAmicable() {
+      num1 = document.getElementById("num1").value;
+      num2 = document.getElementById("num2").value;
+
+      num1Factors = returnFactors(num1);
+      num2Factors = returnFactors(num2);
+
+      if ((getSum(num1Factors) == num2) && (getSum(num2Factors) == num1)) {
+        document.getElementById('resultDisplay').textContent =
+          "The numbers: " + num1 + " and " + num2 + " are amicable";
+      } else {
+        document.getElementById('resultDisplay').textContent =
+          "The numbers: " + num1 + " and " + num2 + " are NOT amicable";
+      }
+
+      //popup
+      confirm("The factors of " + num1 + ": " + printFactors(num1Factors) +
+        "\n" +
+        "The factors of " + num2 + ": " + printFactors(num2Factors));
+    }
+  </script>
+</body>
+
+</html>
